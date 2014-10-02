@@ -1068,15 +1068,11 @@ static int sched_rt_runtime_exceeded(struct rt_rq *rt_rq)
 
 			rt_rq->rt_throttled = 1;
 
-		//	if (!once) {
-		//		once = true;
-				printk_sched("sched: RT throttling activated cpu=%d\n",
+			printk_sched("sched: RT throttling activated cpu=%d\n",
 					cpu);
-		//	}
 #ifdef CONFIG_MT_RT_SCHED_CRIT
 			trace_sched_rt_crit(cpu, rt_rq->rt_throttled);
 #endif
-
 		} else {
 			/*
 			 * In case we did anyway, make it go away,
