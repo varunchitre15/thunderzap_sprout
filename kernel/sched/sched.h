@@ -941,6 +941,8 @@ extern void init_task_runnable_average(struct task_struct *p);
 extern void update_cpu_load(struct rq *this_rq);
 #endif
 
+extern void update_idle_cpu_load(struct rq *this_rq);
+
 #ifdef CONFIG_CGROUP_CPUACCT
 #include <linux/cgroup.h>
 /* track cpu usage of a group of tasks and its child groups */
