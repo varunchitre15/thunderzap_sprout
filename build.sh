@@ -13,7 +13,7 @@ export SUBARCH=arm
 export KBUILD_BUILD_USER="varun.chitre15"
 export KBUILD_BUILD_HOST="Monster-Machine"
 make sprout_defconfig
-make
+make -j32
 if [ -a $ZIMAGE ];
 then
 echo "Creating boot image"
