@@ -1,8 +1,25 @@
+ #
+ # Copyright © 2014, Varun Chitre "varun.chitre15" <varun.chitre15@gmail.com>
+ #
+ # Custom build script
+ #
+ # This software is licensed under the terms of the GNU General Public
+ # License version 2, as published by the Free Software Foundation, and
+ # may be copied, distributed, and modified under those terms.
+ #
+ # This program is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ #
+ # Please maintain this if you use this script or any part of it
+ #
 KERNEL_DIR=$PWD
 ZIMAGE=$KERNEL_DIR/arch/arm/boot/zImage
 MKBOOTIMG=$KERNEL_DIR/tools/mkbootimg
 MKBOOTFS=$KERNEL_DIR/tools/mkbootfs
 ROOTFS=$KERNEL_DIR/root.fs
+BOOTIMG=$KERNEL_DIR/boot.img
 BUILD_START=$(date +"%s")
 export CROSS_COMPILE="/root/cm11/prebuilts/gcc/linux-x86/arm/arm-eabi-4.7/bin/arm-eabi-"
 export ARCH=arm
@@ -30,6 +47,11 @@ $MKBOOTIMG --kernel $ZIMAGE --ramdisk $KERNEL_DIR/root.fs  --base 0x80000000 --k
 if ! [ -a $ROOTFS ];
 then
 echo "Ramdisk creation failed"
+exit 1
+fi
+if ! [ -a $BOOTIMG ];
+then
+echo "Boot image creation failed"
 exit 1
 fi
 }
