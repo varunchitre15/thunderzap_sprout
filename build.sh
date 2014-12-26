@@ -3,10 +3,6 @@ ZIMAGE=$KERNEL_DIR/arch/arm/boot/zImage
 MKBOOTIMG=$KERNEL_DIR/tools/mkbootimg
 MKBOOTFS=$KERNEL_DIR/tools/mkbootfs
 BUILD_START=$(date +"%s")
-if [ -a $ZIMAGE ];
-then
-rm $ZIMAGE $KERNEL_DIR/ramdisk.cpio $KERNEL_DIR/root.fs $KERNEL_DIR/boot.img
-fi
 export CROSS_COMPILE="/root/cm11/prebuilts/gcc/linux-x86/arm/arm-eabi-4.7/bin/arm-eabi-"
 export ARCH=arm
 export SUBARCH=arm
