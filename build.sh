@@ -42,7 +42,7 @@ make sprout_defconfig
 make -j32
 if ! [ -a $ZIMAGE ];
 then
-echo -e "$redKernel Compilation failed! Fix the errors!$nocol"
+echo -e "$red Kernel Compilation failed! Fix the errors! $nocol"
 exit 1
 fi
 }
