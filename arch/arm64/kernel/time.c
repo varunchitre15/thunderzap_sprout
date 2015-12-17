@@ -67,6 +67,13 @@ int read_current_timer(unsigned long *timer_value)
 	return 0;
 }
 
+static u64 sched_clock_mult __read_mostly;
+
+unsigned long long notrace sched_clock(void)
+{
+	return arch_timer_read_counter() * sched_clock_mult;
+}
+
 void __init time_init(void)
 {
 	u32 arch_timer_rate;
