@@ -2099,13 +2099,15 @@ static int ext4_add_entry(handle_t *handle, struct dentry *dentry,
 		if (IS_ERR(bh))
 			return PTR_ERR(bh);
 
-		retval = add_dirent_to_buf(handle, dentry, inode, NULL, bh);
+		retval = add_dirent_to_buf(handle, &fname, dir, inode,
+					   NULL, bh);
 		if (retval != -ENOSPC)
 			goto out;
 
 		if (blocks == 1 && !dx_fallback &&
 		    EXT4_HAS_COMPAT_FEATURE(sb, EXT4_FEATURE_COMPAT_DIR_INDEX)) {
-			retval = make_indexed_dir(handle, dentry, inode, bh);
+			retval = make_indexed_dir(handle, &fname, dentry,
+						  inode, bh);
 			bh = NULL; /* make_indexed_dir releases bh */
 			goto out;
 		}
@@ -2125,8 +2127,9 @@ static int ext4_add_entry(handle_t *handle, struct dentry *dentry,
 		t = EXT4_DIRENT_TAIL(bh->b_data, blocksize);
 		initialize_dirent_tail(t, blocksize);
 	}
-	retval = add_dirent_to_buf(handle, dentry, inode, de, bh);
+	retval = add_dirent_to_buf(handle, &fname, dir, inode, de, bh);
 out:
+	ext4_fname_free_filename(&fname);
 	brelse(bh);
 	if (retval == 0)
 		ext4_set_inode_state(inode, EXT4_STATE_NEWENTRY);

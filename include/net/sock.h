@@ -785,9 +785,7 @@ static inline __must_check int sk_add_backlog(struct sock *sk, struct sk_buff *s
 		printk(KERN_ERR "[mtk_net][sock]sk_add_backlog->sk_rcvqueues_full sk->sk_rcvbuf:%d,sk->sk_sndbuf:%d ",sk->sk_rcvbuf,sk->sk_sndbuf);
 		#endif		
 		return -ENOBUFS;
-<<<<<<< HEAD
 	}
-=======
 
 	/*
 	 * If the skb was allocated from pfmemalloc reserves, only
@@ -797,7 +795,6 @@ static inline __must_check int sk_add_backlog(struct sock *sk, struct sk_buff *s
 	if (skb_pfmemalloc(skb) && !sock_flag(sk, SOCK_MEMALLOC))
 		return -ENOMEM;
 
->>>>>>> v3.10.94
 	__sk_add_backlog(sk, skb);
 	sk->sk_backlog.len += skb->truesize;
 	return 0;
